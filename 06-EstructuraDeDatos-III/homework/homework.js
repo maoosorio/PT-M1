@@ -19,42 +19,64 @@ function BinarySearchTree(value) {
 
 BinarySearchTree.prototype.size = function () {
 	var contador = 1
-	if(this.right) contador += this.right.size()
-	if(this.left) contador += this.left.size()
+	if (this.right) contador += this.right.size()
+	if (this.left) contador += this.left.size()
 	return contador
 }
 
 BinarySearchTree.prototype.insert = function (value) {
-		if (value > this.value) {
-			if (!this.right) this.right = new BinarySearchTree(value)
-			else this.right.insert(value)
-		} else {
-			if (!this.left) this.left = new BinarySearchTree(value)
-			else this.left.insert(value)
-		}
+	if (value > this.value) {
+		if (!this.right) this.right = new BinarySearchTree(value)
+		else this.right.insert(value)
+	} else {
+		if (!this.left) this.left = new BinarySearchTree(value)
+		else this.left.insert(value)
+	}
 }
 
-	BinarySearchTree.prototype.contains = function (value) {
-		if(this.value === value) return true
-		if(this.right){
-			if(this.right.contains(value)) return true
-		}
-		if(this.left){
-			if(this.left.contains(value)) return true
-		}
-		return false
-	} 
-
-	BinarySearchTree.prototype.depthFirstForEach = function () {
-		
+BinarySearchTree.prototype.contains = function (value) {
+	if (this.value === value) return true
+	if (this.right) {
+		if (this.right.contains(value)) return true
 	}
+	if (this.left) {
+		if (this.left.contains(value)) return true
+	}
+	return false
+}
 
-	BinarySearchTree.prototype.breadthFirstForEach = function () {}
+BinarySearchTree.prototype.depthFirstForEach = function (cb, orden) {
+	switch(orden){
+		case 'pre-order':
+		cb(this.value)
+		if(this.left) this.left.depthFirstForEach(cb,orden)
+		if(this.right) this.right.depthFirstForEach(cb,orden)
+		break
+		case 'post-order':
+		if(this.left) this.left.depthFirstForEach(cb,orden)
+		if(this.right) this.right.depthFirstForEach(cb,orden)
+		cb(this.value)
+		break
+		default:
+		if(this.left) this.left.depthFirstForEach(cb,orden)
+		cb(this.value)
+		if(this.right) this.right.depthFirstForEach(cb,orden)
+		break
+	}
+}
+
+BinarySearchTree.prototype.breadthFirstForEach = function (cb, array=[]) {
+	cb(this.value)
+	if(this.left) array.push(this.left)
+	if(this.right) array.push(this.right)
+	var siguiente = array.shift()
+	if(siguiente) siguiente.breadthFirstForEach(cb, array)
+}
 
 
-	// No modifiquen nada debajo de esta linea
-	// --------------------------------
+// No modifiquen nada debajo de esta linea
+// --------------------------------
 
-	module.exports = {
-		BinarySearchTree,
-	};
+module.exports = {
+	BinarySearchTree,
+};
