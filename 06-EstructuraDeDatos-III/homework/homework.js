@@ -69,8 +69,7 @@ BinarySearchTree.prototype.breadthFirstForEach = function (cb, array=[]) {
 	cb(this.value)
 	if(this.left) array.push(this.left)
 	if(this.right) array.push(this.right)
-	var siguiente = array.shift()
-	if(siguiente) siguiente.breadthFirstForEach(cb, array)
+	if(array.length>0) array.shift().breadthFirstForEach(cb, array)
 }
 
 
