@@ -19,6 +19,21 @@ function factorear(num) {
 		}
 	}
 	return array
+
+	/*
+	Solucion del profe
+	let result = [1]
+	let val = 2
+	while (num > 1){
+		if( num%val === 0){
+			result.push(val)
+			num=num/val	
+		}else{
+			val++
+		}
+	}
+	return result
+	*/
 }
 
 function bubbleSort(array) {
@@ -37,6 +52,23 @@ function bubbleSort(array) {
 		}
 	}
 	return array;
+
+	/*
+	solucion del profe
+	let swap = true
+	while(swap){
+		swap = false
+		for(let i = 0; i < array.length; i++){
+			if(array[i] > array[i+1]){
+				let temp = array[i]
+				array[i] = array[i+1]
+				array[i+1] = temp
+				swap = true
+			}
+		}
+	}	
+	return array
+	*/
 }
 
 
@@ -56,6 +88,20 @@ function insertionSort(array) {
 		array[j + 1] = aux
 	}
 	return array;
+
+	/* 
+	solucion profe
+	for(let i = 1; i<array.length; i++){
+		let x = i-1
+		let temp = array[i]
+		while(x >= 0 && temp < array[x]){
+			array[x+1] = array[x]
+			x--
+		}
+		array[x+1] = temp
+	}
+	return array
+	*/
 }
 
 
